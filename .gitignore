@@ -1,0 +1,28 @@
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.log
+
+# Node modules (future)
+node_modules/
+npm-debug.log*
+
+# Build artifacts (future)
+dist/
+build/
+*.pyc
+__pycache__/
+
+# Environment files
+.env
+.env.local
