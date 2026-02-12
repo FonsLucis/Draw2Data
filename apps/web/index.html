@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draw2Data - 주식 시나리오 시뮬레이터</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📈 Draw2Data</h1>
+            <p>그림으로 주식 가격 궤적을 그리고 시뮬레이션하세요</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Left Panel: Settings -->
+            <aside class="settings-panel">
+                <h2>설정</h2>
+                
+                <div class="setting-group">
+                    <h3>축 설정</h3>
+                    <label>
+                        일봉 수 (N):
+                        <input type="number" id="numDays" value="252" min="10" max="1000" />
+                    </label>
+                    <label>
+                        가격 최소:
+                        <input type="number" id="priceMin" value="0" step="0.01" />
+                    </label>
+                    <label>
+                        가격 최대:
+                        <input type="number" id="priceMax" value="100" step="0.01" />
+                    </label>
+                    <label>
+                        스케일:
+                        <select id="scaleType">
+                            <option value="linear">선형</option>
+                            <option value="log">로그</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="setting-group">
+                    <h3>스무딩</h3>
+                    <label>
+                        이동평균 윈도우:
+                        <input type="number" id="smoothWindow" value="5" min="1" max="50" />
+                    </label>
+                </div>
+
+                <div class="setting-group">
+                    <h3>리샘플링</h3>
+                    <label>
+                        주봉 기간 (일):
+                        <input type="number" id="weeklyPeriod" value="5" min="1" max="10" />
+                    </label>
+                    <label>
+                        월봉 기간 (일):
+                        <input type="number" id="monthlyPeriod" value="21" min="1" max="30" />
+                    </label>
+                </div>
+
+                <div class="setting-group">
+                    <h3>시뮬레이션</h3>
+                    <label>
+                        초기 현금:
+                        <input type="number" id="initialCash" value="10000" min="0" step="100" />
+                    </label>
+                    <label>
+                        거래 비용 (%):
+                        <input type="number" id="tradingCost" value="0.3" min="0" max="10" step="0.1" />
+                    </label>
+                </div>
+
+                <div class="button-group">
+                    <button id="generateBtn" class="btn-primary">생성</button>
+                    <button id="clearBtn" class="btn-secondary">Clear</button>
+                    <button id="undoBtn" class="btn-secondary">Undo</button>
+                    <button id="downloadBtn" class="btn-success">CSV 다운로드</button>
+                </div>
+            </aside>
+
+            <!-- Center: Canvas -->
+            <div class="canvas-container">
+                <h2>가격 궤적 그리기</h2>
+                <div class="canvas-wrapper">
+                    <canvas id="drawCanvas"></canvas>
+                </div>
+                <p class="hint">💡 마우스로 드래그하여 가격 궤적을 그리세요</p>
+            </div>
+
+            <!-- Right Panel: Results -->
+            <aside class="results-panel">
+                <h2>결과</h2>
+                
+                <div class="kpi-section">
+                    <h3>KPI</h3>
+                    <div id="kpiDisplay" class="kpi-grid">
+                        <div class="kpi-item">
+                            <span class="kpi-label">최종 가치:</span>
+                            <span class="kpi-value" id="finalValue">-</span>
+                        </div>
+                        <div class="kpi-item">
+                            <span class="kpi-label">누적 수익률:</span>
+                            <span class="kpi-value" id="cumReturn">-</span>
+                        </div>
+                        <div class="kpi-item">
+                            <span class="kpi-label">CAGR:</span>
+                            <span class="kpi-value" id="cagr">-</span>
+                        </div>
+                        <div class="kpi-item">
+                            <span class="kpi-label">MDD:</span>
+                            <span class="kpi-value" id="mdd">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-preview">
+                    <h3>데이터 미리보기 (상위 20행)</h3>
+                    <div id="dataTable" class="table-container">
+                        <p class="no-data">데이터가 없습니다. 먼저 궤적을 그리고 '생성' 버튼을 눌러주세요.</p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
