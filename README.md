@@ -16,11 +16,32 @@ Draw2Data는 마우스로 캔버스에 가격 궤적을 그려 주식 투자 시
 
 ## 🚀 로컬 실행
 
-### 요구사항
-- Python 3.x (간단한 HTTP 서버용) 또는
-- Node.js (대안)
+### Phase 2 (현재)
 
-### 실행 방법
+#### 요구사항
+- Node.js 18.x 이상
+- npm 또는 yarn
+
+#### 실행 방법
+
+```bash
+# 의존성 설치
+npm install
+
+# 개발 모드로 실행 (프론트엔드 + 백엔드)
+npm run dev
+
+# 또는 개별 실행
+npm run dev:frontend  # 프론트엔드만
+npm run dev:backend   # 백엔드만
+```
+
+- 프론트엔드: `http://localhost:5173`
+- 백엔드 API: `http://localhost:3000/api`
+
+### Phase 1 (레거시)
+
+Phase 1 정적 웹 앱은 `apps/web` 디렉토리에 보관되어 있습니다.
 
 #### Python 사용
 ```bash
@@ -66,41 +87,59 @@ npx http-server -p 5173
 ```
 Draw2Data/
 ├── apps/
-│   └── web/              # 정적 웹 앱
-│       ├── index.html    # 메인 HTML
-│       ├── styles.css    # 스타일시트
-│       └── app.js        # 애플리케이션 로직
+│   ├── frontend/          # React + TypeScript 앱 (Phase 2)
+│   │   ├── src/
+│   │   ├── index.html
+│   │   ├── vite.config.ts
+│   │   └── package.json
+│   ├── backend/           # Node.js + Express API (Phase 2)
+│   │   ├── src/
+│   │   │   └── index.ts
+│   │   ├── tsconfig.json
+│   │   └── package.json
+│   └── web/               # 정적 웹 앱 (Phase 1 - 레거시)
+│       ├── index.html
+│       ├── styles.css
+│       └── app.js
 ├── docs/
-│   ├── ARCHITECTURE.md   # 아키텍처 문서
-│   └── ROADMAP.md        # 로드맵
+│   ├── ARCHITECTURE.md    # 아키텍처 문서
+│   └── ROADMAP.md         # 로드맵
+├── package.json           # 루트 패키지 (워크스페이스)
 ├── .gitignore
-├── LICENSE               # MIT 라이선스
+├── LICENSE                # MIT 라이선스
 └── README.md
 ```
 
 ## 🗺️ 로드맵
 
-현재는 **Phase 1: 정적 MVP** 단계입니다.
+현재는 **Phase 2: 웹 플랫폼** 단계입니다.
 
-- **Phase 1** ✅: 브라우저 전용 정적 웹 앱
-- **Phase 2** 🚀: 사용자 계정, 프로젝트 저장, API 백엔드
+- **Phase 1** ✅: 브라우저 전용 정적 웹 앱 (완료)
+- **Phase 2** 🚀: 사용자 계정, 프로젝트 저장, API 백엔드 (진행 중)
 - **Phase 3** 🌟: 공유 기능, 템플릿 마켓, 고급 시뮬레이션
 
 자세한 내용은 [ROADMAP.md](docs/ROADMAP.md)를 참고하세요.
 
 ## 🏗️ 기술 스택
 
-### 현재 (Phase 1)
+### Phase 2 (현재)
+- **Frontend**: React, TypeScript, Vite
+- **Backend**: Node.js, Express, TypeScript
+- **인증**: JWT (JSON Web Tokens)
+- **상태 관리**: React Hooks
+- **API**: RESTful API
+
+### Phase 1 (레거시)
 - **HTML5**: 구조
 - **CSS3**: 스타일링 및 반응형 디자인
 - **Vanilla JavaScript**: 로직 및 인터랙션
 - **Canvas API**: 그리기 인터페이스
 
-### 향후 확장 (Phase 2-3)
-- Frontend: React, TypeScript
-- Backend: Node.js/FastAPI, PostgreSQL
+### 향후 확장 (Phase 3)
+- Database: PostgreSQL
 - Worker: Python (NumPy, Pandas), Redis Queue
 - Storage: S3/MinIO
+- Real-time: WebSocket
 
 자세한 아키텍처는 [ARCHITECTURE.md](docs/ARCHITECTURE.md)를 참고하세요.
 
