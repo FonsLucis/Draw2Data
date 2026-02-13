@@ -4,6 +4,22 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+/**
+ * PHASE 2 MOCK API SERVER
+ * 
+ * ⚠️ SECURITY WARNING ⚠️
+ * This is a MOCK implementation for Phase 2 development.
+ * It does NOT include:
+ * - Real database integration
+ * - Password hashing (bcrypt)
+ * - JWT token generation/verification
+ * - Rate limiting
+ * - Input sanitization beyond basic validation
+ * 
+ * DO NOT USE IN PRODUCTION without implementing proper security measures.
+ * See PHASE2.md for implementation roadmap.
+ */
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -42,7 +58,12 @@ app.post('/api/auth/register', (req: Request, res: Response) => {
     return res.status(400).json({ error: 'Password must be at least 8 characters' });
   }
 
-  // TODO: Implement actual user registration with database
+  // TODO: SECURITY WARNING - Implement actual user registration with database
+  // - Hash password with bcrypt before storing
+  // - Check for duplicate emails
+  // - Generate proper user ID
+  // - Store user in database
+  // DO NOT USE THIS MOCK IMPLEMENTATION IN PRODUCTION
   res.status(201).json({
     message: 'User registered successfully (mock)',
     user: { id: 1, email },
@@ -60,7 +81,11 @@ app.post('/api/auth/login', (req: Request, res: Response) => {
     return res.status(400).json({ error: 'Invalid email format' });
   }
 
-  // TODO: Implement actual authentication with database and JWT
+  // TODO: SECURITY WARNING - Implement actual authentication
+  // - Verify password against hashed password in database
+  // - Generate real JWT token with proper secret and expiration
+  // - Add rate limiting to prevent brute force attacks
+  // DO NOT USE THIS MOCK IMPLEMENTATION IN PRODUCTION
   res.json({
     message: 'Login successful (mock)',
     token: 'mock-jwt-token',
