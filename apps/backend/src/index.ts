@@ -20,12 +20,26 @@ app.get('/api/health', (req: Request, res: Response) => {
   });
 });
 
+// Helper function for email validation
+const isValidEmail = (email: string): boolean => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
+
 // Auth endpoints
 app.post('/api/auth/register', (req: Request, res: Response) => {
   const { email, password } = req.body;
   
   if (!email || !password) {
     return res.status(400).json({ error: 'Email and password are required' });
+  }
+
+  if (!isValidEmail(email)) {
+    return res.status(400).json({ error: 'Invalid email format' });
+  }
+
+  if (password.length < 8) {
+    return res.status(400).json({ error: 'Password must be at least 8 characters' });
   }
 
   // TODO: Implement actual user registration with database
@@ -40,6 +54,10 @@ app.post('/api/auth/login', (req: Request, res: Response) => {
   
   if (!email || !password) {
     return res.status(400).json({ error: 'Email and password are required' });
+  }
+
+  if (!isValidEmail(email)) {
+    return res.status(400).json({ error: 'Invalid email format' });
   }
 
   // TODO: Implement actual authentication with database and JWT
